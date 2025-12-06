@@ -20,7 +20,22 @@ const HomePage = () => {
     );
 
     useEffect(() => {
-        axios.get(baseUrl).then(res => { console.log(res) });
+        axios.get(baseUrl).then(res => {
+            const temp = [];
+
+            res.data.slice(0, 5).forEach(
+                item => {
+                    temp.push(
+                        {
+                            id: item.id,
+                            cardTitle: item.title.slice(0, 20),
+                            cardText: item.body.slice(0, 50)
+                        }
+                    )
+                }
+            )
+            setLabels(temp);
+        });
     })
 
     return (
